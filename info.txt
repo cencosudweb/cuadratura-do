@@ -1,0 +1,15 @@
+El programa se esta ejecutando...
+[iFechaIni]25-12-2017
+[iFechaFin]25-12-2017
+[iFechaIni2]2017/12/25
+[iFechaFin2]2017/12/25
+[iFechaIni3]20171225
+[iFechaFin3]20171225
+[iFechaIni4]2017-12-25
+[iFechaFin4]2017-12-25
+Pausa para Eliminar cuadratura_do sleep(60 seg)
+[sql Eliminar] DELETE FROM  cuadratura_do  where 1 = 1 AND F_CREACION >= '2017-12-25 00:00:00' AND F_CREACION <= '2017-12-25 23:59:59'
+Pausa para insertar cuadratura_ctl sleep(60 seg)
+[sb] SELECT ca14.PO.purchase_orders_id        as OrdenNum , ca14.PO.PURCHASE_ORDERS_STATUS    AS Est_SC , max(To_Char (ca14.POE.created_dttm, 'YYYY-MM-DD HH24:MI:SS') )              as F_Creacion ,To_Char (ca14.pol.comm_dlvr_dttm, 'dd/MM/yy')AS ETA , min(ca14.POE.created_dttm)        as FechaLibera , ca14.ORDERS.O_FACILITY_ALIAS_ID   as Facility , ca14.Po.Tc_Purchase_Orders_Id     as SolCliente , ca14.ORDERS.tc_order_id           as DO , ca14.ORDERS.DO_STATUS             AS Est_DO , ca14.po.order_category            AS T_Orden , ca14.POE.old_value                AS Ant_Est , ca14.POE.new_value                AS Nuev_Est FROM CA14.purchase_orders_event POE LEFT JOIN CA14.PURCHASE_ORDERs PO ON POE.purchase_orders_id = PO.purchase_orders_id  LEFT JOIN CA14.orders ON PO.tc_purchase_orders_id = orders.purchase_order_number LEFT JOIN CA14.PURCHASE_ORDERS_LINE_ITEM POL ON POE.purchase_orders_id = pol.purchase_orders_id WHERE (ca14.POE.field_name = 'STATUS' OR POE.field_name = 'LINE ITEM STATUS') AND ca14.ORDERS.DO_STATUS BETWEEN 110 AND 130 AND ca14.po.channel_type = 20 AND ca14.PO.creation_type =30 AND ca14.PO.RMA_STATUS is NULL AND ca14.POL.allocated_qty <> 0 AND ca14.ORDERS.Is_cancelled = 0 AND ca14.ORDERS.O_FACILITY_ALIAS_ID in ('012','200','400') AND ca14.POE.created_dttm >= to_date('25-12-2017 00:00:00','DD-MM-YYYY HH24:MI:SS') AND ca14.POE.created_dttm <= to_date('25-12-2017 23:59:59','DD-MM-YYYY HH24:MI:SS') GROUP BY ca14.PO.purchase_orders_id, ca14.PO.created_dttm, ca14.PO.customer_code, ca14.Po.Customer_Firstname, ca14.Po.Customer_Lastname, ca14.ORDERS.O_FACILITY_ALIAS_ID, ca14.Po.Tc_Purchase_Orders_Id, ca14.ORDERS.tc_order_id, ca14.PO.PURCHASE_ORDERS_STATUS, ca14.ORDERS.DO_STATUS, ca14.POE.old_value, ca14.POE.new_value, ca14.po.order_category, ca14.pol.comm_dlvr_dttm 
+Archivos creados.
+El programa finalizo.
